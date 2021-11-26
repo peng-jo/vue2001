@@ -516,7 +516,6 @@ ul {
   }
   .s0sliderWrap {
     width: 100%;
-    cursor: move;
     display: flex;
     white-space: nowrap;
     overflow: hidden;
@@ -561,7 +560,6 @@ ul {
 }
 #popular .s1sliderWrap {
   width: 100%;
-  cursor: move;
   display: flex;
   white-space: nowrap;
   overflow: hidden;
@@ -607,7 +605,6 @@ ul {
 }
 #subject2 .s1sliderWrap {
   width: 100%;
-  cursor: move;
   display: flex;
   white-space: nowrap;
   overflow: hidden;
