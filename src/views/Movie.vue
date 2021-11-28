@@ -32,10 +32,10 @@
                   <li class="runtime">{{ this.selInfo.runtime }}분</li>
                   <li class="genre">
                     <template
-                      v-for="genres in this.selInfo.genres"
+                      v-for="(genres, index) in this.selInfo.genres"
                       :key="genres.id"
                     >
-                      <span v-if="genres.id !== 14">
+                      <span v-if="index < selInfo.genres.length - 1">
                         {{ genres.name + '/' }}
                       </span>
                       <span v-else>
@@ -45,6 +45,9 @@
                   </li>
                 </ul>
                 <div class="stars">
+                  <span class="star">{{
+                    this.makeStars(this.selInfo.vote_average)
+                  }}</span>
                   <span class="percent">{{ this.selInfo.vote_average }}</span>
                 </div>
                 <p class="desc">
@@ -107,13 +110,15 @@
             v-for="movie in movies"
             :key="movie.id"
             class="s1 slider"
+            v-on:click="movieClickHandler($event)"
+            :id="movie.id"
           >
             <img
               :src="'http://image.tmdb.org/t/p/w500/' + movie.poster_path"
               class="s1 sliderImg"
             />
             <div class="s1 sliderDesc">
-              <div class="s1 sliderTitle">{{ movie.original_title }}</div>
+              <div class="s1 sliderTitle">{{ movie.title }}</div>
               <div class="s1 sliderDay">{{ movie.release_date }}</div>
             </div>
           </swiper-slide>
@@ -125,52 +130,26 @@
     <!-- subject2 -->
     <section id="subject2">
       <div class="scontainer">
-        <h3>주제2</h3>
+        <h3>탑레이팅 영화</h3>
         <swiper
           class="s1sliderWrap swiper-wrapper"
           :slides-per-view="5"
           :space-between="50"
         >
-          <swiper-slide class="slider">
-            <img class="sliderImg" />
+          <swiper-slide
+            class="slider"
+            v-for="movie in moviesRate"
+            :key="movie.id"
+            v-on:click="movieClickHandler($event)"
+            :id="movie.id"
+          >
+            <img
+              :src="'http://image.tmdb.org/t/p/w500/' + movie.poster_path"
+              class="sliderImg"
+            />
             <div class="sliderDesc">
-              <div class="sliderTitle">영화제목</div>
-              <div class="sliderDay">상영일자</div>
-            </div>
-          </swiper-slide>
-          <swiper-slide class="slider">
-            <img class="sliderImg" />
-            <div class="sliderDesc">
-              <div class="sliderTitle">영화제목</div>
-              <div class="sliderDay">상영일자</div>
-            </div>
-          </swiper-slide>
-          <swiper-slide class="slider">
-            <img class="sliderImg" />
-            <div class="sliderDesc">
-              <div class="sliderTitle">영화제목</div>
-              <div class="sliderDay">상영일자</div>
-            </div>
-          </swiper-slide>
-          <swiper-slide class="slider">
-            <img class="sliderImg" />
-            <div class="sliderDesc">
-              <div class="sliderTitle">영화제목</div>
-              <div class="sliderDay">상영일자</div>
-            </div>
-          </swiper-slide>
-          <swiper-slide class="slider">
-            <img class="sliderImg" />
-            <div class="sliderDesc">
-              <div class="sliderTitle">영화제목</div>
-              <div class="sliderDay">상영일자</div>
-            </div>
-          </swiper-slide>
-          <swiper-slide class="slider">
-            <img class="sliderImg" />
-            <div class="sliderDesc">
-              <div class="sliderTitle">영화제목</div>
-              <div class="sliderDay">상영일자</div>
+              <div class="sliderTitle">{{ movie.title }}</div>
+              <div class="sliderDay">{{ movie.release_date }}</div>
             </div>
           </swiper-slide>
         </swiper>
@@ -181,52 +160,26 @@
     <!-- subject2 -->
     <section id="subject2">
       <div class="scontainer">
-        <h3>주제2</h3>
+        <h3>개봉예정 영화</h3>
         <swiper
           class="s1sliderWrap swiper-wrapper"
           :slides-per-view="5"
           :space-between="50"
         >
-          <swiper-slide class="slider">
-            <img class="sliderImg" />
+          <swiper-slide
+            class="slider"
+            v-for="movie in moviesComming"
+            :key="movie.id"
+            v-on:click="movieClickHandler($event)"
+            :id="movie.id"
+          >
+            <img
+              :src="'http://image.tmdb.org/t/p/w500/' + movie.poster_path"
+              class="sliderImg"
+            />
             <div class="sliderDesc">
-              <div class="sliderTitle">영화제목</div>
-              <div class="sliderDay">상영일자</div>
-            </div>
-          </swiper-slide>
-          <swiper-slide class="slider">
-            <img class="sliderImg" />
-            <div class="sliderDesc">
-              <div class="sliderTitle">영화제목</div>
-              <div class="sliderDay">상영일자</div>
-            </div>
-          </swiper-slide>
-          <swiper-slide class="slider">
-            <img class="sliderImg" />
-            <div class="sliderDesc">
-              <div class="sliderTitle">영화제목</div>
-              <div class="sliderDay">상영일자</div>
-            </div>
-          </swiper-slide>
-          <swiper-slide class="slider">
-            <img class="sliderImg" />
-            <div class="sliderDesc">
-              <div class="sliderTitle">영화제목</div>
-              <div class="sliderDay">상영일자</div>
-            </div>
-          </swiper-slide>
-          <swiper-slide class="slider">
-            <img class="sliderImg" />
-            <div class="sliderDesc">
-              <div class="sliderTitle">영화제목</div>
-              <div class="sliderDay">상영일자</div>
-            </div>
-          </swiper-slide>
-          <swiper-slide class="slider">
-            <img class="sliderImg" />
-            <div class="sliderDesc">
-              <div class="sliderTitle">영화제목</div>
-              <div class="sliderDay">상영일자</div>
+              <div class="sliderTitle">{{ movie.title }}</div>
+              <div class="sliderDay">{{ movie.release_date }}</div>
             </div>
           </swiper-slide>
         </swiper>
@@ -237,52 +190,26 @@
     <!-- subject2 -->
     <section id="subject2">
       <div class="scontainer">
-        <h3>주제2</h3>
+        <h3>최신개봉 영화</h3>
         <swiper
           class="s1sliderWrap swiper-wrapper"
           :slides-per-view="5"
           :space-between="50"
         >
-          <swiper-slide class="slider">
-            <img class="sliderImg" />
+          <swiper-slide
+            class="slider"
+            v-for="movie in moviesRealComming"
+            :key="movie.id"
+            v-on:click="movieClickHandler($event)"
+            :id="movie.id"
+          >
+            <img
+              :src="'http://image.tmdb.org/t/p/w500/' + movie.poster_path"
+              class="sliderImg"
+            />
             <div class="sliderDesc">
-              <div class="sliderTitle">영화제목</div>
-              <div class="sliderDay">상영일자</div>
-            </div>
-          </swiper-slide>
-          <swiper-slide class="slider">
-            <img class="sliderImg" />
-            <div class="sliderDesc">
-              <div class="sliderTitle">영화제목</div>
-              <div class="sliderDay">상영일자</div>
-            </div>
-          </swiper-slide>
-          <swiper-slide class="slider">
-            <img class="sliderImg" />
-            <div class="sliderDesc">
-              <div class="sliderTitle">영화제목</div>
-              <div class="sliderDay">상영일자</div>
-            </div>
-          </swiper-slide>
-          <swiper-slide class="slider">
-            <img class="sliderImg" />
-            <div class="sliderDesc">
-              <div class="sliderTitle">영화제목</div>
-              <div class="sliderDay">상영일자</div>
-            </div>
-          </swiper-slide>
-          <swiper-slide class="slider">
-            <img class="sliderImg" />
-            <div class="sliderDesc">
-              <div class="sliderTitle">영화제목</div>
-              <div class="sliderDay">상영일자</div>
-            </div>
-          </swiper-slide>
-          <swiper-slide class="slider">
-            <img class="sliderImg" />
-            <div class="sliderDesc">
-              <div class="sliderTitle">영화제목</div>
-              <div class="sliderDay">상영일자</div>
+              <div class="sliderTitle">{{ movie.title }}</div>
+              <div class="sliderDay">{{ movie.release_date }}</div>
             </div>
           </swiper-slide>
         </swiper>
@@ -314,6 +241,9 @@ export default {
         redirect: 'follow',
       },
       movies: [],
+      moviesRate: [],
+      moviesComming: [],
+      moviesRealComming: [],
       search: '',
       selId: 0,
       selInfo: {},
@@ -323,6 +253,77 @@ export default {
     movieClickHandler: function (event) {
       this.selId = event.target.parentNode.id;
     },
+    makeStars: function (rate) {
+      const rating = Math.floor(rate / 2) + Math.ceil((rate / 2) % 1);
+      let star = '';
+      for (let i = 0; i < rating; i++) {
+        star += '★';
+      }
+      return star.padEnd(5, '☆');
+    },
+    popularQuery: async function () {
+      await fetch(
+        `https://api.themoviedb.org/3/movie/popular?api_key=${this.movieAPI}&page=1&language=ko`,
+        this.requestOptions
+      )
+        .then((response) => response.json())
+        .then((result) => {
+          this.movies = result.results;
+          console.log(this.movies);
+          this.selId = result.results[0].id;
+          console.log(result.results);
+        })
+        .catch((error) => console.log('error', error));
+    },
+    topRateQuery: async function () {
+      await fetch(
+        `https://api.themoviedb.org/3/movie/top_rated?api_key=${this.movieAPI}&language=ko&page=1`,
+        this.requestOptions
+      )
+        .then((response) => response.json())
+        .then((result) => {
+          this.moviesRate = result.results;
+        })
+        .catch((error) => console.log('error', error));
+    },
+    commingQuery: async function () {
+      await fetch(
+        `https://api.themoviedb.org/3/movie/upcoming?api_key=${this.movieAPI}&language=ko&page=1&region=KR`,
+        this.requestOptions
+      )
+        .then((response) => response.json())
+        .then((result) => {
+          this.moviesComming = result.results;
+        })
+        .catch((error) => console.log('error', error));
+    },
+    realCommingQuery: async function () {
+      const now = new Date();
+      const newDate = new Date(
+        now.getFullYear(),
+        now.getMonth(),
+        now.getDate() - 7
+      );
+
+      console.log(this.returnDate(now));
+      console.log(this.returnDate(newDate));
+      await fetch(
+        `https://api.themoviedb.org/3/discover/movie?api_key=${
+          this.movieAPI
+        }&language=ko&region=KR&sort_by=primary_release_date.asc&page=1&primary_release_date.gte=${this.returnDate(
+          newDate
+        )}&primary_release_date.lte=${this.returnDate(now)}`,
+        this.requestOptions
+      )
+        .then((response) => response.json())
+        .then((result) => {
+          console.log(result.results);
+          this.moviesRealComming = result.results;
+        })
+        .catch((error) => console.log('error', error));
+    },
+    returnDate: (date) =>
+      `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`,
   },
   watch: {
     selId: function (newVal, oldVal) {
@@ -341,18 +342,10 @@ export default {
     },
   },
   mounted() {
-    fetch(
-      `https://api.themoviedb.org/3/movie/popular?api_key=${this.movieAPI}&page=1`,
-      this.requestOptions
-    )
-      .then((response) => response.json())
-      .then((result) => {
-        this.movies = result.results;
-        console.log(this.movies);
-        this.selId = result.results[0].id;
-        console.log(result.results);
-      })
-      .catch((error) => console.log('error', error));
+    this.popularQuery();
+    this.topRateQuery();
+    this.commingQuery();
+    this.realCommingQuery();
   },
 
   setup() {
@@ -468,7 +461,14 @@ ul {
         }
         .stars {
           margin-bottom: 26px;
+          .star {
+            color: #e5ce4b;
+            font-weight: 400;
+            letter-spacing: 0;
+            font-size: 2vw;
+          }
           .percent {
+            margin-left: 1vw;
             font-size: 1.1vw;
             font-weight: 400;
           }
@@ -537,6 +537,13 @@ ul {
         background-color: #333;
         width: 100%;
         height: 200px;
+      }
+      &:last-child {
+        .sliderNum {
+          z-index: -1;
+          letter-spacing: -45px;
+          transform: translate(-2vw, 0);
+        }
       }
     }
   }

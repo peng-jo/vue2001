@@ -127,7 +127,6 @@
   height: 94px;
 }
 .footer .join a.rounded {
-  width: 110px;
   position: relative;
   top: 140px;
   border-color: #fff;

@@ -1,7 +1,7 @@
 <template>
   <header id="header">
     <ul>
-      <li><a class="active" href="#">리액트.JS</a></li>
+      <li><a class="active" href="#">뷰.JS</a></li>
       <li><a href="#">영화</a></li>
       <li><a href="#">TV</a></li>
     </ul>
